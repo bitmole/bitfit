@@ -15,9 +15,10 @@ class ReactiveInt(object):
         self.n = n
         self.refs = []
 
-    def add(self, other):
-        self.refs.append(other)
+    def add(self, *args):
+        self.refs.extend(args)
 
+    # TODO: support property setter
     def update(self, n):
         self.n = n
 
@@ -35,8 +36,7 @@ def main():
     c = ReactiveInt(2)
     a = ReactiveInt()
 
-    a.add(b)
-    a.add(c)
+    a.add(b, c)
     print(repr(a))
     print(a)
 
