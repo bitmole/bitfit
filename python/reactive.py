@@ -11,40 +11,55 @@ class ReactiveInt(object):
 
     """ Reactive integer: naive, lazy implementation """
 
-    def __init__(self, n=0):
-        self.n = n
-        self.refs = []
+    def __init__(self, val=0):
+        self._val = val
+        self._refs = [self]
 
     def add(self, *args):
-        self.refs.extend(args)
+        self._refs.extend(args)
 
-    # TODO: support property setter
-    def update(self, n):
-        self.n = n
+    @property
+    def val(self):
+        return sum(ref._val for ref in self._refs)
 
-    def _val(self):
-        return sum(ref.n for ref in self.refs) # lazy
+    @val.setter
+    def val(self, val):
+        self._val = val
 
     def __str__(self):
-        return str(self._val())
+        return str(self.val)
 
     def __repr__(self):
-        return repr([ref.n for ref in self.refs])
+        return '%d %s' % (self.val, repr([ref._val for ref in self._refs]))
+
+class ObservableInt(object):
+
+    """ Reactive integer: push implementation """
+
+    def __init__(self):
+        """TODO: to be defined. """
+
+class CustomInt(int):
+
+    """ Custom reactive integer """
+        
         
 def main():
-    b = ReactiveInt(1)
-    c = ReactiveInt(2)
-    a = ReactiveInt()
+    a = ReactiveInt(1)
+    b = ReactiveInt(2)
+    c = ReactiveInt(3)
 
+    assert a.val == 1
+
+    # TODO: refactor to a = b.add(c)
     a.add(b, c)
-    print(repr(a))
-    print(a)
+    assert a.val == 6 # sum([1, 2, 3])
 
-    b.update(10)
-    print(repr(a))
-    print(a)
+    b.val = 4
+    assert a.val == 8 # sum([1, 4, 3])
 
-    assert a._val() == 12 
+    c.val = 5
+    assert a.val == 10 # sum([1, 4, 5]) 
 
 if __name__ == "__main__":
     main()
