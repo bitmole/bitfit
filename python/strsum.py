@@ -23,7 +23,7 @@ def score(c):
         return 0
 
 def main():
-    scores = [score(c) for c in 'hello world']
+    scores = [score(c) for c in 'why and how']
     print(scores)
     print(sum(scores))
 
