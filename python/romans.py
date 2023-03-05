@@ -13,6 +13,9 @@ ROMAN_NUMERAL_MAP = (('M',  1000),
                      ('I',  1))
 
     
+class OutOfRangeError(ValueError):
+    pass
+
 def to_roman(n):
     """Creates Roman representation of a given number
 
@@ -20,6 +23,9 @@ def to_roman(n):
     :returns: Roman numeral representation as a string
 
     """
+    if n > 3999:
+        raise OutOfRangeError('number out of range (must be less than 4000)')
+
     result = ''
     for numeral, integer in ROMAN_NUMERAL_MAP:
         while n >= integer:
