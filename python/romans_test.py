@@ -69,6 +69,13 @@ class ToRomanBadInput(unittest.TestCase):
     """to_roman should fail with invalid input"""
     def test_too_large(self):
         self.assertRaises(romans.OutOfRangeError, romans.to_roman, 4000)
+
+    def test_zero(self):
+        self.assertRaises(romans.OutOfRangeError, romans.to_roman, 0)
+
+    def test_negative(self):
+        self.assertRaises(romans.OutOfRangeError, romans.to_roman, -1)
+        
         
 
 if __name__ == "__main__":

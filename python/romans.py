@@ -23,7 +23,7 @@ def to_roman(n):
     :returns: Roman numeral representation as a string
 
     """
-    if n > 3999:
+    if not (0 < n < 4000):
         raise OutOfRangeError('number out of range (must be less than 4000)')
 
     result = ''
