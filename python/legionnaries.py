@@ -7,11 +7,11 @@ In the range, 1 - 2,660 (half the number of Romans in a legion), expressed in
 Roman numerals, how many times does the numeral “X” occur?
 '''
 
-def to_roman(n):
-    """Creates representation of a number in roman numerals
+from romans import to_roman
 
-    :n: Number in arabic digits
-    :returns: Number in roman numerals
+def x_count(n):
+    return sum(to_roman(i).count('X') for i in range(1, n+1))
 
-    """
-    pass
+if __name__ == "__main__":
+    HALF_LEGION = 2660
+    assert(x_count(HALF_LEGION) == 3977)
