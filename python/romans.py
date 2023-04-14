@@ -24,10 +24,10 @@ def to_roman(n):
 
     """
     if not isinstance(n, int):
-        raise NonIntegerError('argument must be integer')
+        raise NonIntegerError('non-integers cannot be converted')
 
     if not (0 < n < 4000):
-        raise OutOfRangeError('number out of range (must be less than 4000)')
+        raise OutOfRangeError('number out of range (must be 1..4000)')
 
     result = ''
     for numeral, integer in ROMAN_NUMERAL_MAP:
