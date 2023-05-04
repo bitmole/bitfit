@@ -44,4 +44,11 @@ def from_roman(s):
     :returns: integer
 
     """
-    pass
+
+    result = 0
+    for numeral, integer in ROMAN_NUMERAL_MAP:
+        while s.startswith(numeral):
+            result += integer
+            s = s[len(numeral):]
+
+    return result
